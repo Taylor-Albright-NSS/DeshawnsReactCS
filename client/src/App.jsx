@@ -2,7 +2,6 @@ import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { Outlet } from "react-router-dom";
-import { Test } from "./Components/Test";
 
 function App() {
   return (
@@ -12,7 +11,7 @@ function App() {
           <Nav navbar>
             <NavbarBrand href="/">🐕‍🦺 🐩 DeShawn's Dog Walking</NavbarBrand>
             <NavItem>
-              <NavLink href="/walkers">Walkers</NavLink>
+              <NavLink href="/dogs">Dogs</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
