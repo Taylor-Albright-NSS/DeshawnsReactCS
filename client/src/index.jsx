@@ -4,16 +4,13 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import Home from "./Home";
-import HomeView from "./Components/HomeView";
 import { DogListView } from "./Components/DogListView";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<DogListView />} />
+      <Route path="*" element={<App />}>
       </Route>
     </Routes>
   </BrowserRouter>

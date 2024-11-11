@@ -13,7 +13,6 @@ export const DogListView = () => {
             setDogList(dogs)
             console.log(dogList)
         })
-
     }, [])
 
     return (
@@ -24,7 +23,7 @@ export const DogListView = () => {
                     {dogList.map(dog => {
                         return (
                             <section className="dog-item" key={dog.id}>
-                                <Link className="dog-link" to={`/dogdetails/${dog.id}`}>{dog.name}</Link>
+                                <Link className="dog-link" to={`/${dog.id}`}>{dog.name}</Link>
                             </section>
                         )
                     })}

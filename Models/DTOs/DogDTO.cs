@@ -1,4 +1,4 @@
-namespace DeShawnsDogWalking.DTOs.Models;
+namespace DeShawnsDogWalking.Models.DTOs;
 
 public class DogDTO
 {
@@ -6,4 +6,6 @@ public class DogDTO
     public string Name { get; set; }
     public int WalkerId { get; set; }
     public int CityId { get; set; }
+    public WalkerDTO WalkerDTO { get; set; }
+
 }
