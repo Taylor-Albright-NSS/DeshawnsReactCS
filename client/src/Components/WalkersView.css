@@ -1,0 +1,24 @@
+.walker-details-view-container {
+    display: flex;
+    border: 2px solid red;
+    justify-content: center;
+}
+
+.walker-item-container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid green;
+    width: 50%;
+
+}
+
+.walker-item {
+    border: 2px solid orange;
+}
+
+.select {
+    width: 200px;
+    height: 40px;
+    margin-top: 3rem;
+    margin-right: 1rem;
+}

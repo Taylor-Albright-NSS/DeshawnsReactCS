@@ -18,8 +18,7 @@ export const DogListView = () => {
     }, [])
 
     return (
-        <>
-            <div className="dog-view-container">
+            <main className="dog-view-container">
                 <h2>DOGS</h2>
                 <button onClick={() => {Navigate("/dogform")}}>Add Dog</button>
                 <article className="dog-item-container">
@@ -31,7 +30,6 @@ export const DogListView = () => {
                         )
                     })}
                 </article>
-            </div>
-        </>
+            </main>
     )
 }
