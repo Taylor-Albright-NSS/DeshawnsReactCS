@@ -1,11 +1,13 @@
 import { getWalkers, getCities, getCityWalkers } from "../apiManager"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import "./WalkersView.css"
 
 export const WalkersView = () => {
     const [walkers, setWalkers] = useState([])
     const [cities, setCities] = useState([])
     const [displayWalkersBasedOnCity, setDisplayWalkersBasedOnCity] = useState([])
+    const Navigate = useNavigate()
 
     useEffect(() => {
         getWalkers().then(wArray => {
@@ -41,6 +43,10 @@ export const WalkersView = () => {
         }
     }
 
+    const handleAddDog = () => {
+        Navigate("/adddogtowalker")
+    }
+
     return (
         <main className="walker-details-view-container">
             <select className="select" onChange={handleCityChange}>
@@ -53,9 +59,12 @@ export const WalkersView = () => {
             <h2>Walkers View</h2>
                 { walkers?.walker ? walkers.walker.map(walker => {
                     return (
-                        <section className="walker-item" key={walker.id}>
-                            {walker.name}
-                        </section>
+                        <div className="walker-button-container" key={walker.id}>
+                            <section className="walker-item">
+                                {walker.name}
+                            </section>
+                            <button onClick={handleAddDog}>Add Dog</button>
+                        </div>
                     )
                 })
 
@@ -63,9 +72,12 @@ export const WalkersView = () => {
                 
                 walkers.map(walker => {
                     return (
-                        <section className="walker-item" key={walker.id}>
-                            {walker.name}
-                        </section>
+                        <div className="walker-button-container" key={walker.id}>
+                            <section className="walker-item">
+                                {walker.name}
+                            </section>
+                            <button onClick={handleAddDog}>Add Dog</button>
+                        </div>
                     )
                 })}
             </article>
