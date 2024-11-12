@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using DeShawnsDogWalking.Models;
 using DeShawnsDogWalking.Models.DTOs;
 
@@ -19,45 +20,44 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//DATABASE LISTS
-List<DogDTO> dogsDTO = new List<DogDTO>()
+List<Dog> dogs = new List<Dog>()
 {
-    new DogDTO()
+    new Dog()
     {
         Id = 1,
         Name = "Tinkle Bell",
         WalkerId = 1,
         CityId = 1,
     },
-    new DogDTO()
+    new Dog()
     {
         Id = 2,
         Name = "Mr. Peepers",
         WalkerId = 2,
         CityId = 2,
     },
-    new DogDTO()
+    new Dog()
     {
         Id = 3,
         Name = "Noodle",
         WalkerId = 1,
         CityId = 2,
     },
-    new DogDTO()
+    new Dog()
     {
         Id = 4,
         Name = "Dr. Corn",
         WalkerId = 3,
         CityId = 2,
     },
-    new DogDTO()
+    new Dog()
     {
         Id = 5,
         Name = "Waggy",
         WalkerId = 1,
         CityId = 2,
     },
-    new DogDTO()
+    new Dog()
     {
         Id = 6,
         Name = "Claw Foot",
@@ -66,19 +66,19 @@ List<DogDTO> dogsDTO = new List<DogDTO>()
     },
 };
 
-List<WalkerDTO> walkersDTO = new List<WalkerDTO>()
+List<Walker> walkers = new List<Walker>()
 {
-    new WalkerDTO()
+    new Walker()
     {
         Id = 1,
         Name = "Tim-Tim"
     },
-    new WalkerDTO()
+    new Walker()
     {
         Id = 2,
         Name = "Jimmy James"
     },
-    new WalkerDTO()
+    new Walker()
     {
         Id = 3,
         Name = "Walter"
@@ -91,35 +91,59 @@ app.MapGet("/api/hello", () =>
     return new { Message = "Welcome to DeShawn's Dog Walking" };
 });
 
+app.MapPost("/api/dogs/", (Dog newDog) => {
+    int newId = dogs.Max(dog => dog.Id) + 1;
+    newDog.Id = newId;
+    dogs.Add(newDog);
+    return Results.Created($"/api/dogs/{newDog.Id}", newDog);
+});
+
 app.MapGet("/api/dogs", () => {
-    return dogsDTO;
+    return dogs;
 });
 
 app.MapGet("/api/dogs/{id}", (int id) => 
 {
-    DogDTO dog = dogsDTO.FirstOrDefault(dog => dog.Id == id);
+    Dog dog = dogs.FirstOrDefault(dog => dog.Id == id);
     if (dog == null) {return Results.NotFound();}
+    DogDTO dogDTO = new DogDTO
+{
+    Id = dog.Id,
+    Name = dog.Name,
+    WalkerId = dog.WalkerId,
+    CityId = dog.CityId
+};
 
-    WalkerDTO walker = walkersDTO.FirstOrDefault(walker => walker.Id == dog.WalkerId);
+
+
+    Walker walker = walkers.FirstOrDefault(walker => walker.Id == dog.WalkerId);
+    WalkerDTO walkerDTO = new WalkerDTO{};
+    if (walker == null) {
+        walkerDTO = null;
+    }
+    // if (walker == null) {return Results.NotFound();}
+
+
+
     if (walker != null) 
     {
-        dog.WalkerDTO = new WalkerDTO
+        dogDTO.WalkerDTO = new WalkerDTO
         {
-            Id = dog.WalkerId,
+            Id = (int)dogDTO.WalkerId,
             Name = walker.Name
         };
     } else {
-        dog.WalkerDTO = null;
+        dogDTO.WalkerDTO = null;
     }
-    return dog is not null ? Results.Ok(dog) : Results.NotFound();
+    return dogDTO is not null ? Results.Ok(dogDTO) : Results.NotFound();
 });
 
 app.MapGet("/api/walkers", () => {
-    return walkersDTO;
+    return walkers;
 });
 
 app.MapGet("/api/walkers/{id}", (int id) => {
-    var walker = walkersDTO.FirstOrDefault(dog => dog.Id == id);
+    var walker = walkers.FirstOrDefault(dog => dog.Id == id);
     return walker is not null ? Results.Ok(walker) : Results.NotFound();});
 
 app.Run();

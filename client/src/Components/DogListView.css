@@ -16,6 +16,7 @@
     height: 600px;
     padding: 2rem;
     border: 2px solid green;
+    overflow: auto;
 }
 
 .dog-item {

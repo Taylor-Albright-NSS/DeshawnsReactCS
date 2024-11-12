@@ -1,17 +1,19 @@
 import { getDogs } from "../apiManager"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import "./DogListView.css"
 
 // const dogListDB = await getDogs()
 
 export const DogListView = () => {
     const [dogList, setDogList] = useState([])
+    const Navigate = useNavigate()
 
     useEffect(() => {
         getDogs().then((dogs) => {
             setDogList(dogs)
-            console.log(dogList)
+            console.log(dogs)
         })
     }, [])
 
@@ -19,6 +21,7 @@ export const DogListView = () => {
         <>
             <div className="dog-view-container">
                 <h2>DOGS</h2>
+                <button onClick={() => {Navigate("/dogform")}}>Add Dog</button>
                 <article className="dog-item-container">
                     {dogList.map(dog => {
                         return (

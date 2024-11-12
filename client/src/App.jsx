@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { DogListView } from "./Components/DogListView";
 import { DogDetailsView } from "./Components/DogDetailsView"
+import { DogForm } from "./Components/DogForm";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Nav navbar>
             <NavbarBrand href="/">🐕‍🦺 🐩 DeShawn's Dog Walking</NavbarBrand>
             <NavItem>
-              <NavLink href="/dogs">Dogs</NavLink>
+              <NavLink href="/">Dogs</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route index element={<DogListView />} />
           <Route path={`/:id`} element={<DogDetailsView />} />
+          <Route path="/dogform" element={<DogForm />} />
         </Routes>
       </>
     </div>
