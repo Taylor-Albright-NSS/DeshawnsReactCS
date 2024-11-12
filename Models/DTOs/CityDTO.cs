@@ -4,5 +4,5 @@ public class CityDTO
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public WalkerDTO Walker { get; set; }
+    public List<WalkerDTO> Walker { get; set; }
 }

@@ -29,7 +29,7 @@ function App() {
           <Route path={`/:id`} element={<DogDetailsView />} />
           <Route path="/dogform" element={<DogForm />} />
           <Route path="/walkers" element={<WalkersView />} />
-          <Route path="/adddogtowalker" element={<AddDogToWalkerView />} />
+          <Route path="/adddogtowalker/:id" element={<AddDogToWalkerView />} />
         </Routes>
       </>
     </div>

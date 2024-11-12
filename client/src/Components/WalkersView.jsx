@@ -24,11 +24,7 @@ export const WalkersView = () => {
     }, [])
 
     const handleCityChange = (event) => {
-        //1 == nashville
-        //2 == knoxille
-        //3 == memphis
         let cityId = event.target.options.selectedIndex
-        console.log(cityId)
         if (cityId > 0) {
             getCityWalkers(cityId).then(array => {
                 console.log(array)
@@ -37,14 +33,14 @@ export const WalkersView = () => {
         }
         else {
             getWalkers().then(wArray => {
-                console.log(wArray)
                 setWalkers(wArray)
             })
         }
     }
 
-    const handleAddDog = () => {
-        Navigate("/adddogtowalker")
+    const handleAddDog = (walker) => {
+        console.log(walker)
+        Navigate(`/adddogtowalker/${walker.id}`)
     }
 
     return (
@@ -63,7 +59,7 @@ export const WalkersView = () => {
                             <section className="walker-item">
                                 {walker.name}
                             </section>
-                            <button onClick={handleAddDog}>Add Dog</button>
+                            <button onClick={() => handleAddDog(walker)}>Add Dog</button>
                         </div>
                     )
                 })
@@ -76,7 +72,7 @@ export const WalkersView = () => {
                             <section className="walker-item">
                                 {walker.name}
                             </section>
-                            <button onClick={handleAddDog}>Add Dog</button>
+                            <button onClick={() => handleAddDog(walker)}>Add Dog</button>
                         </div>
                     )
                 })}

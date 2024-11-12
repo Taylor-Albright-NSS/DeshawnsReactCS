@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using DeShawnsDogWalking.Models;
 using DeShawnsDogWalking.Models.DTOs;
+using Microsoft.VisualBasic;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,6 +64,27 @@ List<Dog> dogs = new List<Dog>()
         Name = "Claw Foot",
         WalkerId = 3,
         CityId = 1,
+    },
+    new Dog()
+    {
+        Id = 7,
+        Name = "Sir Barksalot",
+        WalkerId = 1,
+        CityId = 3,
+    },
+    new Dog()
+    {
+        Id = 8,
+        Name = "Stinky",
+        WalkerId = null,
+        CityId = 3,
+    },
+    new Dog()
+    {
+        Id = 7,
+        Name = "Moops",
+        WalkerId = null,
+        CityId = 3,
     },
 };
 
@@ -132,13 +154,13 @@ List<WalkerCity> walkerCities = new List<WalkerCity>()
     {
         Id = 3,
         WalkerId = 2,
-        CityId = 3
+        CityId = 2
     },
     new WalkerCity() 
     {
         Id = 4,
         WalkerId = 3,
-        CityId = 4
+        CityId = 3
     },
     new WalkerCity() 
     {
@@ -180,21 +202,35 @@ app.MapGet("/api/walkercities/{id}", (int id) =>
 
     List<WalkerCity> walkerCitiesForWalker1 = walkerCities.Where(wc => wc.WalkerId == id).ToList();
 
-    List<City> walker1Cities = walkerCitiesForWalker1.Select(wc => cities.First(c => c.Id == wc.CityId)).ToList();
+    List<City> walker1Cities = walkerCitiesForWalker1.Select(wc => 
+
+        {
+        var city = cities.First(c => c.Id == wc.CityId);
+        city.Walker = null;
+        return city;
+    }).ToList();
 
     walker.City = walker1Cities;
     return walker;
 });
 
+app.MapPut("/api/dogs/{id}", (int id, DogDTO dogDTO) => {
+    Dog dog = dogs.FirstOrDefault(dog => dog.Id == id);
+    dog.Name = dogDTO.Name;
+    dog.WalkerId = dogDTO.WalkerId;
+    dog.CityId = dogDTO.CityId;
+    return Results.Ok(dog);
+});
+
 app.MapGet("/api/citywalkers/{id}", (int id) => 
 {
-    City city = cities.FirstOrDefault(w => w.Id == id);
+    City city = cities.FirstOrDefault(c => c.Id == id);
 
     List<WalkerCity> cityWalkersForCity1 = walkerCities.Where(wc => wc.CityId == id).ToList();
 
     List<Walker> city1Walkers = cityWalkersForCity1.Select(wc => 
     {
-        var walker = walkers.First(c => c.Id == wc.WalkerId);
+        var walker = walkers.First(w => w.Id == wc.WalkerId);
         walker.City = null;
         return walker;
     }).ToList();
@@ -202,13 +238,6 @@ app.MapGet("/api/citywalkers/{id}", (int id) =>
     city.Walker = city1Walkers;
     return city;
 });
-
-
-
-
-
-
-
 
 app.MapGet("/api/cities", () => {
     List<CityDTO> CityDTOsList = cities.Select(city => new CityDTO
@@ -271,7 +300,8 @@ app.MapGet("/api/walkers", () => {
 });
 
 app.MapGet("/api/walkers/{id}", (int id) => {
-    var walker = walkers.FirstOrDefault(dog => dog.Id == id);
-    return walker is not null ? Results.Ok(walker) : Results.NotFound();});
+    Walker walker = walkers.FirstOrDefault(walker => walker.Id == id);
+    return walker is not null ? Results.Ok(walker) : Results.NotFound();
+});
 
 app.Run();
