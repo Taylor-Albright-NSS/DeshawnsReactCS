@@ -8,6 +8,7 @@ import { DogDetailsView } from "./Components/DogDetailsView"
 import { DogForm } from "./Components/DogForm";
 import { WalkersView } from "./Components/WalkersView";
 import { AddDogToWalkerView } from "./Components/AddDogToWalkerView";
+import { AddCityView } from "./Components/AddCityView";
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
             <NavItem>
               <NavLink href="/">Dogs</NavLink>
               <NavLink href="/walkers">Walkers</NavLink>
-
+              <NavLink href="/addcity">Cities</NavLink>
             </NavItem>
           </Nav>
         </Navbar>
@@ -29,6 +30,7 @@ function App() {
           <Route path={`/:id`} element={<DogDetailsView />} />
           <Route path="/dogform" element={<DogForm />} />
           <Route path="/walkers" element={<WalkersView />} />
+          <Route path="/addcity" element={<AddCityView />} />
           <Route path="/adddogtowalker/:id" element={<AddDogToWalkerView />} />
         </Routes>
       </>

@@ -196,6 +196,18 @@ List<WalkerCity> walkerCities = new List<WalkerCity>()
 
 
 //
+app.MapPost("/api/cities", (CityDTO city) => {
+    int newCityId = cities.Max(city => city.Id) + 1;
+
+    City newCity = new City()
+    {
+        Name = city.Name
+    };
+    cities.Add(newCity);
+    return Results.Created($"api/cities/{newCityId}", newCity);
+});
+
+
 app.MapGet("/api/walkercities/{id}", (int id) => 
 {
     Walker walker = walkers.FirstOrDefault(w => w.Id == id);
