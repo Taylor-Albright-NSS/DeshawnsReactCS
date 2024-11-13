@@ -196,6 +196,22 @@ List<WalkerCity> walkerCities = new List<WalkerCity>()
 
 
 //
+app.MapDelete("/api/dogs/{id}", (int id) => {
+    Dog dog = dogs.FirstOrDefault(dog => dog.Id == id);
+
+    dogs.Remove(dog);
+
+    return Results.NoContent();
+});
+app.MapDelete("/api/walkers/{id}", (int id) => {
+    Walker walker = walkers.FirstOrDefault(walker => walker.Id == id);
+
+    walkers.Remove(walker);
+
+    return Results.NoContent();
+});
+
+
 app.MapPut("/api/walkers/{id}", (int id, WalkerDTO walker) => {
     Walker updatedWalker = walkers.FirstOrDefault(walker => walker.Id == id);
     updatedWalker.Name = walker.Name;

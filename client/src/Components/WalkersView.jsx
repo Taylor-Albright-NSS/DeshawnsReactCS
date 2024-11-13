@@ -44,6 +44,23 @@ export const WalkersView = () => {
         Navigate(`/adddogtowalker/${walker.id}`)
     }
 
+    const handleRemoveWalker = (walker) => {
+        const walkerId = walker.id
+        fetch(`http://localhost:5173/api/walkers/${walkerId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                setWalkers(previousWalkers => previousWalkers.filter(walkers => walkers.id != walkerId))
+            } else {
+                console.log('failed to delete walker')
+            }
+        })
+    }
+
     return (
         <main className="walker-details-view-container">
             <select className="select" onChange={handleCityChange}>
@@ -61,6 +78,7 @@ export const WalkersView = () => {
                                 <Link to={`/editwalker/${walker.id}`}>{walker.name}</Link>
                             </section>
                             <button onClick={() => handleAddDog(walker)}>Add Dog</button>
+                            <button onClick={() => handleRemoveWalker(walker)}>Remove Walker</button>
                         </div>
                     )
                 })
@@ -74,6 +92,7 @@ export const WalkersView = () => {
                             <Link to={`/editwalker/${walker.id}`}>{walker.name}</Link>
                             </section>
                             <button onClick={() => handleAddDog(walker)}>Add Dog</button>
+                            <button onClick={() => handleRemoveWalker(walker)}>Remove Walker</button>
                         </div>
                     )
                 })}
