@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { getDogs } from "../apiManager"
+import { getCities } from "../apiManager"
 
 export const DogForm = () => {
+    const [cities, setCities] = useState()
     const [newDog, setNewDog] = useState({
         name: '',
         walkerId: null,
@@ -13,14 +15,25 @@ export const DogForm = () => {
         }
     })
     const [newDogId, setNewDogId] = useState(0)
+    const Navigate = useNavigate()
+
     useEffect(() => {
         getDogs().then(dogsArray => {
-            console.log(dogsArray.length)
             setNewDogId(dogsArray.length + 1)
         })
     }, [])
 
-    const Navigate = useNavigate()
+    useEffect(() => {
+        getCities().then(citiesArray => {
+            setCities(citiesArray)
+        })
+    }, [])
+
+    const handleCityChange = (event) => {
+        const newCityId = event.target.options.selectedIndex + 1
+        setNewDog({...newDog, cityId: newCityId})
+    }
+
 
 
     const handleSubmit = async (e) => {
@@ -48,6 +61,13 @@ export const DogForm = () => {
             placeholder="Dog's name"
             onChange={handleInputChange}
             ></input>
+            <select onChange={handleCityChange}>
+                {cities && cities.map(city => {
+                    return (
+                        <option data-id={city.id} key={city.id}>{city.name}</option>
+                    )
+                })}
+            </select>
             <button onClick={handleSubmit}>Add dog</button>
             </fieldset>
         </form>

@@ -20,7 +20,7 @@ export const DogListView = () => {
     return (
             <main className="dog-view-container">
                 <h2>DOGS</h2>
-                <button onClick={() => {Navigate("/dogform")}}>Add Dog</button>
+                <button onClick={() => Navigate("/dogform")}>Add Dog</button>
                 <article className="dog-item-container">
                     {dogList.map(dog => {
                         return (

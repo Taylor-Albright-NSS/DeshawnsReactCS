@@ -13,7 +13,7 @@
     flex-wrap: wrap;
     align-content: center;
     width: 600px;
-    height: 600px;
+    height: 680px;
     padding: 2rem;
     border: 2px solid green;
     overflow: auto;
@@ -26,8 +26,6 @@
     justify-content: center;
     margin-left: .5rem;
     margin-right: .5rem;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
     font-size: 22px;
     width: 30%;
     height: 30%;

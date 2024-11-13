@@ -9,8 +9,6 @@ export const AddDogToWalkerView = () => {
     const [cities, setCities] = useState([])
 
     const { id } = useParams()
-    const walkerId = id
-
 
     useEffect(() => {
         getDogs().then(dogArray => {
@@ -28,7 +26,7 @@ export const AddDogToWalkerView = () => {
 
     const handleAssignDog = (dogId) => {
         const dogToModify = dogs.find(dog => dog.id === dogId)
-        dogToModify.walkerId = walkerId
+        dogToModify.walkerId = parseInt(id)
         console.log(dogToModify, ' DOG TO ADD')
         fetch(`http://localhost:5173/api/dogs/${dogToModify.id}`, {
             method: "PUT",
@@ -44,11 +42,11 @@ export const AddDogToWalkerView = () => {
             {cities.map(city => {
                 const dogsInCity = dogs.filter(dog => dog.cityId === city.id && dog.walkerId != walker.id)
                 return (
-                    <div className="city-and-dog-container" >
+                    <div className="city-and-dog-container" key={city.id}>
                         <h2>{city.name}</h2>
-                        <ul key={city.id}>
+                        <ul>
                             {dogsInCity.map(dog => {
-                                return <Link><li onClick={() => handleAssignDog(dog.id)} key={dog.id}>{dog.name}</li></Link>
+                                return <Link key={dog.id}><li onClick={() => handleAssignDog(dog.id)}>{dog.name}</li></Link>
                             })}
                         </ul>
                     </div>

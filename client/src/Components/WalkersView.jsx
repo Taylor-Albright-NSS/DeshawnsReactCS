@@ -1,6 +1,7 @@
 import { getWalkers, getCities, getCityWalkers } from "../apiManager"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import "./WalkersView.css"
 
 export const WalkersView = () => {
@@ -57,7 +58,7 @@ export const WalkersView = () => {
                     return (
                         <div className="walker-button-container" key={walker.id}>
                             <section className="walker-item">
-                                {walker.name}
+                                <Link to={`/editwalker/${walker.id}`}>{walker.name}</Link>
                             </section>
                             <button onClick={() => handleAddDog(walker)}>Add Dog</button>
                         </div>
@@ -70,7 +71,7 @@ export const WalkersView = () => {
                     return (
                         <div className="walker-button-container" key={walker.id}>
                             <section className="walker-item">
-                                {walker.name}
+                            <Link to={`/editwalker/${walker.id}`}>{walker.name}</Link>
                             </section>
                             <button onClick={() => handleAddDog(walker)}>Add Dog</button>
                         </div>

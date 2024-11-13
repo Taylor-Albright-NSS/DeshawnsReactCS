@@ -9,6 +9,7 @@ import { DogForm } from "./Components/DogForm";
 import { WalkersView } from "./Components/WalkersView";
 import { AddDogToWalkerView } from "./Components/AddDogToWalkerView";
 import { AddCityView } from "./Components/AddCityView";
+import { EditWalkerView } from "./Components/EditWalkerView";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/dogform" element={<DogForm />} />
           <Route path="/walkers" element={<WalkersView />} />
           <Route path="/addcity" element={<AddCityView />} />
+          <Route path="/editwalker/:id" element={<EditWalkerView />} />
           <Route path="/adddogtowalker/:id" element={<AddDogToWalkerView />} />
         </Routes>
       </>

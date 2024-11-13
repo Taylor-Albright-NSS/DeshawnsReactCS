@@ -30,6 +30,10 @@ export const getCity = async (id) => {
   return res.json()
 }
 //Walkers with cities embedded
+export const getWalkerCityBridgeTable = async () => {
+  const res = await fetch("/api/walkercities")
+  return res.json()
+}
 export const getWalkerCities = async (id) => {
   const res = await fetch(`/api/walkercities/${id}`)
   return res.json()

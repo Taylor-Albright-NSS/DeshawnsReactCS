@@ -13,7 +13,7 @@ export const AddCityView = () => {
             console.log(cities, ' CITIES')
             setCities(cities)
         })
-    }, []) 
+    }, [newCityName]) 
 
     const handleAddCity = async () => {
         const newCity = newCityName
@@ -41,7 +41,7 @@ export const AddCityView = () => {
             <article className="cities-list">
                 {cities.map(city => {
                     return (
-                        <section>{city.name}</section>
+                        <section key={city.id}>{city.name}</section>
                     )
                 })}
             </article>
