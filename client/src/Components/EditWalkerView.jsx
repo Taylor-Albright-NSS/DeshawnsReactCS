@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { getCities, getWalkerCities, getWalkerCityBridgeTable } from "../apiManager"
+import { useNavigate } from "react-router-dom"
 
 export const EditWalkerView = () => {
     const [walker, setWalker] = useState({})
@@ -8,6 +9,7 @@ export const EditWalkerView = () => {
     const [initiallyChecked, setInitiallyChecked] = useState({})
     const [walkerCitiesTables, setWalkerCitiesTables] = useState([])
     const [walkerCityTablesToAdd, setWalkerCityTablesToAdd] = useState([])
+    const Navigate = useNavigate()
     const { id } = useParams()
 
     useEffect(() => {
@@ -82,6 +84,7 @@ export const EditWalkerView = () => {
             },
             body: JSON.stringify(updatedWalker)
         })
+        Navigate("/walkers")
     }
 
     const handleInputChange = (event) => {
@@ -109,7 +112,7 @@ export const EditWalkerView = () => {
                         </div>
                     ))}
                 </section>
-                <button type="submit">Submit</button>
+                <button type="submit">Update</button>
             </form>
         </main>
     )

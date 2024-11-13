@@ -1,0 +1,17 @@
+  features/1/home-view[m
+  features/2/dog-details-view[m
+  features/3/walkers-view[m
+  features/4/add-dog-to-walker[m
+  features/5/add-new-city[m
+  features/6/edit-walker-details[m
+* [32mfeatures/7/delete-dog[m
+  main[m
+  [31mremotes/origin/HEAD[m -> origin/main
+  [31mremotes/origin/features/1/home-view[m
+  [31mremotes/origin/features/2/dog-details-view[m
+  [31mremotes/origin/features/3/walkers-view[m
+  [31mremotes/origin/features/4/add-dog-to-walker[m
+  [31mremotes/origin/features/5/add-new-city[m
+  [31mremotes/origin/features/6/edit-walker-details[m
+  [31mremotes/origin/features/7/delete-dog[m
+  [31mremotes/origin/main[m
